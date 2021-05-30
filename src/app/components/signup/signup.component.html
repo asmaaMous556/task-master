@@ -1,0 +1,95 @@
+
+        <form [formGroup]="userForm" (ngSubmit)="signUp(userForm.value)">
+          <div class="row">
+            <div class="col-6">
+              <label for="exampleInputEmail1" class="form-label">Name </label>
+              <input type="string" class="form-control"
+              required
+              formControlName="name" 
+              id="exampleInputEmail1" aria-describedby="NamelHelp">
+              <div class="text-danger"
+              *ngIf="userForm.get('name').touched && userForm.get('name').errors?.required">
+                Name is required !
+              </div>
+              <div class="text-danger"
+              *ngIf="userForm.get('name').errors?.pattern">
+               Only English characters are allowed, no special characters !
+              </div>
+               
+          </div>
+            <div class="col-6">
+                <label for="exampleInputEmail1" class="form-label">Email </label>
+                <input type="email" class="form-control"
+                required
+                formControlName="email"
+                 id="exampleInputEmail1" aria-describedby="emailHelp">
+                 <div class="text-danger"
+                 *ngIf="userForm.get('email').touched && userForm.get('email').errors?.required">
+                  Email is required !
+                </div>
+              <div class="text-danger"
+              *ngIf="userForm.get('email').errors?.pattern">
+               Incorrect email format
+            </div>
+           </div>
+           </div>
+
+            <div class="row">
+              <div class="col-6">
+               
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password"
+                required
+                formControlName="password"
+                 class="form-control" id="exampleInputPassword1">
+                 <div class="text-danger"
+                *ngIf="userForm.get('password').touched && userForm.get('password').errors?.required">
+                  Password is required !
+                </div>
+                <div class="text-danger" *ngIf="userForm.get('password').errors?.pattern">
+                 Only English characters are accepted 
+                </div>
+                <div class="text-danger" *ngIf=" userForm.get('password').invalid && userForm.get('password').errors?.minlength">
+                  Password should be at least 8 characters !
+              </div>
+            </div>
+              <div class="col-6">
+                <label for="exampleInputPassword1" class="form-label">Password confirmation</label>
+                  <input type="password" 
+                  required
+                  formControlName="confirmPassword"
+                  class="form-control" id="exampleInputPassword1">
+                  <div class="text-danger"
+                *ngIf="userForm.get('confirmPassword').touched && 
+                userForm.get('confirmPassword').errors?.required">
+                  Confirm password is required !
+                </div>
+                <div class="text-danger" 
+                *ngIf=" userForm.get('confirmPassword').valid &&
+                userForm.get('confirmPassword').value != userForm.get('password').value ">
+                  Confirm password mush be matched to password !
+                </div>   
+              </div>
+            </div>
+              <div class="row">
+                <div class="col-6">
+                    <label for="exampleInputPassword1" class="form-label" >ip address</label>
+                    <input type="string"
+                    formControlName="ipAddress"
+                     class="form-control" id="exampleInputIp" disabled>
+                  </div>
+                <div class="col-6">
+                    <label for="exampleInputPassword1" class="form-label">Nationality</label>
+                    <select class="form-control" formControlName="nationality">
+                      <option *ngFor="let country of countries">{{country.countryName}}</option>
+                    </select>                     
+                </div>
+              </div> 
+              <br>          
+            <div class="row">
+              <div class="col-6"><button type="submit" class="btn btn-primary" 
+                [disabled]="userForm.invalid || userForm.get('confirmPassword').value != userForm.get('password').value " >
+                Sign up</button>
+              </div>
+            </div>
+          </form>
