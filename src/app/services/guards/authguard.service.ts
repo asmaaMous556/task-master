@@ -12,8 +12,6 @@ userToken :any;
 
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean  {
-  
-     //console.log(this.userToken)
     if(!this.auth.getToken()){
       this.router.navigate(['/']);
       return false;
@@ -22,7 +20,5 @@ userToken :any;
     return true 
     }
   }
-  // getToken (){
-  //  return  this.userToken=localStorage.getItem('token');
-  // }
+ 
 }
