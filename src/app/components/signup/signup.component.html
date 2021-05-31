@@ -2,11 +2,13 @@
         <form [formGroup]="userForm" (ngSubmit)="signUp(userForm.value)">
           <div class="row">
             <div class="col-6">
-              <label for="exampleInputEmail1" class="form-label">Name </label>
+              <label for="exampleInputname" class="form-label">Name </label>
               <input type="string" class="form-control"
-              required
+                (keypress)="keyPress($event)"
+                [disabled]="arabicChar"
+                required
               formControlName="name" 
-              id="exampleInputEmail1" aria-describedby="NamelHelp">
+              id="exampleInputname" aria-describedby="NamelHelp">
               <div class="text-danger"
               *ngIf="userForm.get('name').touched && userForm.get('name').errors?.required">
                 Name is required !
@@ -54,11 +56,11 @@
               </div>
             </div>
               <div class="col-6">
-                <label for="exampleInputPassword1" class="form-label">Password confirmation</label>
+                <label for="exampleInputPassword2" class="form-label">Password confirmation</label>
                   <input type="password" 
                   required
                   formControlName="confirmPassword"
-                  class="form-control" id="exampleInputPassword1">
+                  class="form-control" id="exampleInputPassword2">
                   <div class="text-danger"
                 *ngIf="userForm.get('confirmPassword').touched && 
                 userForm.get('confirmPassword').errors?.required">
@@ -73,7 +75,7 @@
             </div>
               <div class="row">
                 <div class="col-6">
-                    <label for="exampleInputPassword1" class="form-label" >ip address</label>
+                    <label for="exampleInputPassword" class="form-label" >ip address</label>
                     <input type="string"
                     formControlName="ipAddress"
                      class="form-control" id="exampleInputIp" disabled>
